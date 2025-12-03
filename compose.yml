@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  mc-server:
+    build: .
+    environment:
+      - SERVER_MOTD=Docker Minecraft Server
+      - SERVER_DIFFICULTY=hard
+      - SERVER_GAMEMODE=survival
+      - SERVER_MAX_PLAYERS=2
+      - SERVER_PVP=on
+    ports:
+      - "8888:25565"
+    volumes:
+      - ./world:/app/world
