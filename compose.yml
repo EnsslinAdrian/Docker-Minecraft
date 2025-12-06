@@ -3,13 +3,17 @@ version: '3.9'
 services:
   mc-server:
     build: .
+    restart: always #or "on-failure"
     environment:
-      - SERVER_MOTD=Docker Minecraft Server
-      - SERVER_DIFFICULTY=hard
-      - SERVER_GAMEMODE=survival
-      - SERVER_MAX_PLAYERS=2
-      - SERVER_PVP=on
+      - SERVER_MOTD=${SERVER_MOTD}
+      - SERVER_DIFFICULTY=${SERVER_DIFFICULTY}
+      - SERVER_GAMEMODE=${SERVER_GAMEMODE}
+      - SERVER_MAX_PLAYERS=${SERVER_MAX_PLAYERS}
+      - SERVER_PVP=${SERVER_PVP}
     ports:
       - "8888:25565"
     volumes:
-      - ./world:/app/world
+      - world_db:/app/
+
+volumes:
+  world_db:

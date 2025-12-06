@@ -1,22 +1,11 @@
 # Minecraft Server – Dockerized (DevSecOps Project)
+This project provides a Minecraft Java Server running in its own Docker container.<br>
+Configuration is done via environment variables, the world is persistently stored, <br>
+and the server can be started reproducibly using Docker Compose.
 
-
-This repository contains a fully Dockerized Minecraft Java Server created as part of a DevSecOps learning project.  
-The purpose of this project is to:
-
-- Build a **custom Docker image** without using a pre-made Minecraft image  
-- Run the server inside a container  
-- Make the configuration fully **environment-variable-driven**  
-- Persist world data using **Docker volumes**  
-- Provide a clear and reproducible setup for hosting a Minecraft server  
-- Learn secure configuration and containerization best practices  
-
-The server used is the official Minecraft Java Edition server JAR (version 1.21.x).
-
----
 
 ## Table of Contents
-1. [Requirements](#requirements)
+1. [Prerequisites](#prerequisites)
 2. [Project Structure](#project-structure)
 3. [Quickstart](#quickstart)
 4. [Usage](#usage)
@@ -24,77 +13,67 @@ The server used is the official Minecraft Java Edition server JAR (version 1.21.
 6. [Environment Variables](#environment-variables)
 7. [Persistent Data](#persistent-data)
 
----
 
-<br>
-
-## Requirements
-
+## Prerequisites
 Before running this project, ensure you have:
 
 - **Docker** installed  
 - **Docker Compose** installed  
-- The official `server.jar` downloaded from:  
-  https://www.minecraft.net/en-us/download/server
 
----
-
-<br>
 
 ## Project Structure
-
 ```
 /
 ├── Dockerfile
 ├── compose.yml
 ├── entrypoint.sh
 ├── server.jar               
-├── eula.txt
-├── world/                    
+├── eula.txt                
 └── README.md
 ```
 
----
-
-<br>
 
 ## Quickstart
+Clone the repository from GitHub:
+```bash
+git clone git@github.com:EnsslinAdrian/Docker-Minecraft.git minecraft_docker
+```
 
-Run the server directly:
+Navigate into the cloned folder:
+```bash
+cd minecraft_docker
+```
+
+Create a `.env` file using this command and fill in the variables:
 
 ```bash
-docker compose up --build
+cp .env.template .env
+```
+
+Run the server directly:
+```bash
+docker compose up -d
 ```
 
 Then connect via Minecraft (Java Edition):
 
 ```
-localhost:8888
+<YOUR_IP>:8888
 ```
 
 If deployed to a cloud VM:
 
 ```
-<YOUR_VM_PUBLIC_IP>:8888
+<YOUR_VM_IP>:8888
 ```
 
----
-
-<br>
 
 ## Usage
-
 To start or stop the server:
 
 ```bash
-docker compose up --build
-docker compose down
-```
-
-To run in background:
-
-```bash
 docker compose up -d
+docker compose down
 ```
 
 To view logs:
@@ -110,12 +89,7 @@ rm -r world/
 docker compose up --build
 ```
 
----
-
-<br>
-
 ## Configuration
-
 The server configuration is stored in:
 
 ```
@@ -124,10 +98,8 @@ The server configuration is stored in:
 
 This file is generated automatically at container startup based on the environment variables you define in `compose.yml`.
 
-<br>
 
 ## Environment Variables
-
 These variables control the server configuration and are applied through `entrypoint.sh`.
 
 | Variable | Default | Description |
@@ -149,12 +121,8 @@ environment:
   SERVER_PVP: on
 ```
 
----
-
-<br>
 
 ## Persistent Data
-
 The world directory is mounted into the container:
 
 ```yaml
@@ -166,13 +134,10 @@ This ensures:
 
 - Worlds remain saved across container restarts  
 - Server configuration is always preserved  
-- No game data is stored inside the image  
+- No game data is lost when rebuilding the image  
 
 The `.dockerignore` intentionally excludes `world/` so the build context stays clean.
 
----
-
-<br>
 
 ## Author
 **Adrian Enßlin**  
