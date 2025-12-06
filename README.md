@@ -127,7 +127,7 @@ The world directory is mounted into the container:
 
 ```yaml
 volumes:
-  - ./world:/app/world
+  - ./world:/app/
 ```
 
 This ensures:
