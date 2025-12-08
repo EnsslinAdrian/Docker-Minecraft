@@ -9,9 +9,6 @@ and the server can be started reproducibly using Docker Compose.
 2. [Project Structure](#project-structure)
 3. [Quickstart](#quickstart)
 4. [Usage](#usage)
-5. [Configuration](#configuration)
-6. [Environment Variables](#environment-variables)
-7. [Persistent Data](#persistent-data)
 
 
 ## Prerequisites
@@ -61,12 +58,6 @@ Then connect via Minecraft (Java Edition):
 <YOUR_IP>:8888
 ```
 
-If deployed to a cloud VM:
-
-```
-<YOUR_VM_IP>:8888
-```
-
 
 ## Usage
 To start or stop the server:
@@ -89,7 +80,8 @@ rm -r world/
 docker compose up --build
 ```
 
-## Configuration
+
+### Configuration
 The server configuration is stored in:
 
 ```
@@ -99,7 +91,7 @@ The server configuration is stored in:
 This file is generated automatically at container startup based on the environment variables you define in `compose.yml`.
 
 
-## Environment Variables
+### Environment Variables
 These variables control the server configuration and are applied through `entrypoint.sh`.
 
 | Variable | Default | Description |
@@ -122,12 +114,12 @@ environment:
 ```
 
 
-## Persistent Data
+### Persistent Data
 The world directory is mounted into the container:
 
 ```yaml
 volumes:
-  - ./world:/app/
+  - world_db:/app/
 ```
 
 This ensures:

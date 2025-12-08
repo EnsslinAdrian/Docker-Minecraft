@@ -1,9 +1,7 @@
-version: '3.9'
-
 services:
   mc-server:
     build: .
-    restart: always #or "on-failure"
+    restart: on-failure:5 
     environment:
       - SERVER_MOTD=${SERVER_MOTD}
       - SERVER_DIFFICULTY=${SERVER_DIFFICULTY}
