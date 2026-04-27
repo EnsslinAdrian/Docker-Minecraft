@@ -1,0 +1,18 @@
+
+services:
+  mc-server:
+    build: .
+    restart: on-failure:5 
+    environment:
+      - SERVER_MOTD=${SERVER_MOTD}
+      - SERVER_DIFFICULTY=${SERVER_DIFFICULTY}
+      - SERVER_GAMEMODE=${SERVER_GAMEMODE}
+      - SERVER_MAX_PLAYERS=${SERVER_MAX_PLAYERS}
+      - SERVER_PVP=${SERVER_PVP}
+    ports:
+      - "8888:25565"
+    volumes:
+      - world_db:/app/
+
+volumes:
+  world_db:
